@@ -1,1 +1,36 @@
-/*# sourceMappingURL=style.css.map */
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+* {
+  font-family: "Public Sans", sans-serif;
+}
+
+.App {
+  background-color: #151515;
+}
+
+.heading {
+  color: #fff;
+}
+
+.btn-primary {
+  background-color: #fff;
+  border-radius: 10px;
+  color: #a91d3a;
+  border: none;
+}
+.btn-primary:hover, .btn-primary:active {
+  background-color: #c73659 !important;
+}
+
+.main-container {
+  height: 100vh;
+}
+.main-container h1 {
+  color: #c73659;
+  font-weight: 700;
+}
+.main-container .box {
+  border-radius: 20px;
+  width: 100%;
+  min-height: 500px;
+  background-color: #a91d3a;
+}/*# sourceMappingURL=style.css.map */

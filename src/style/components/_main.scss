@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    font-family: 'Public Sans', sans-serif;
+}
+
+.App {
+    background-color: #151515;
+}
+
+$black: #151515;
+$darkRed: #a91d3a;
+$red: #c73659;
+$grey: #eeeeee;
+$white: #fff;
+
+.heading {
+    color: $white;
+}
+
+.btn-primary {
+    background-color: $white;
+    border-radius: 10px;
+    color: $darkRed;
+    border: none;
+
+    &:hover,
+    &:active {
+        background-color: $red !important;
+    }
+}
+
+.main-container {
+    height: 100vh;
+
+    h1 {
+        color: $red;
+        font-weight: 700;
+    }
+
+    .box {
+        border-radius: 20px;
+        width: 100%;
+        min-height: 500px;
+        background-color: $darkRed;
+
+        .select-container {
+        }
+    }
+}
