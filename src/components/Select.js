@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 
-function Select() {
+function Select({ getData }) {
     const [params, setParams] = useState({
-        category: '9',
-        difficulty: 'any',
-        type: 'multiple',
+        category: '0',
+        difficulty: '0',
+        type: '0',
     });
-
-    const setData = () => {
-        console.log(params);
-    };
 
     const handleCategory = (e) => {
         const { value } = e.target;
@@ -38,11 +34,17 @@ function Select() {
         }));
     };
 
+    const setData = () => {
+        console.log(params);
+        getData(params);
+    };
+
     return (
         <div className="select-container d-flex flex-column align-items-center justify-content-center">
             <h3 className="heading mb-3">Select Category:</h3>
 
-            <select className="form-select mb-3" aria-label="Category select" onChange={handleCategory} value={params.category}>
+            <select className="form-select mb-3 text-center" aria-label="Category select" onChange={handleCategory} value={params.category}>
+                <option value="0">Any</option>
                 <option value="9">General Knowledge</option>
                 <option value="10">Entertainment: Books</option>
                 <option value="11">Entertainment: Film</option>
@@ -71,8 +73,8 @@ function Select() {
 
             <h3 className="heading">Select Difficulty:</h3>
 
-            <select className="form-select mb-3" aria-label="Default select example" onChange={handleDifficulty} value={params.difficulty}>
-                <option value="any">Any</option>
+            <select className="form-select mb-3 text-center" aria-label="Default select example" onChange={handleDifficulty} value={params.difficulty}>
+                <option value="0">Any</option>
                 <option value="easy">Easy</option>
                 <option value="medium">Medium</option>
                 <option value="hard">Hard</option>
@@ -80,13 +82,14 @@ function Select() {
 
             <h3 className="heading">Select Type:</h3>
 
-            <select className="form-select mb-3" aria-label="Default select example" onChange={handleType} value={params.type}>
+            <select className="form-select mb-3 text-center" aria-label="Default select example" onChange={handleType} value={params.type}>
+                <option value="0">Any</option>
                 <option value="multiple">Multiple Choice</option>
                 <option value="boolean">True / False</option>
             </select>
 
             <button className="btn btn-primary w-100" onClick={setData}>
-                continue
+                Continue
             </button>
         </div>
     );
