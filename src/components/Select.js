@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Select({ getData }) {
+function Select({ getData, setLoading }) {
     const [params, setParams] = useState({
         category: '0',
         difficulty: '0',

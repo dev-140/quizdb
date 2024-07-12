@@ -13,7 +13,7 @@ const DataFetchingComponent = () => {
     const [isNext, setIsNext] = useState(false);
     const [checkStatus, setCheckStatus] = useState(false);
     const [proceed, setProceed] = useState(false);
-    const [check, setCheck] = useState(false);
+    const [animationNext, setAnimationNext] = useState(false);
 
     let api = 'https://opentdb.com/api.php?amount=1';
     let options = [];
@@ -49,13 +49,13 @@ const DataFetchingComponent = () => {
                 setCheckStatus(false);
                 setProceed(false);
                 setIsNext(false);
-                setCheck(false);
                 setQuestions(data.results);
                 setLoading(false);
                 console.log(data.results);
                 setIsAnimated(true);
                 handleCountdown();
                 filterOptions(data.results);
+                setAnimationNext(true);
             })
             .catch((error) => {
                 setError(error);
@@ -83,7 +83,8 @@ const DataFetchingComponent = () => {
 
     const handleReload = () => {
         checkAnswer();
-        if (check) {
+
+        if (checkStatus) {
             console.log('you are correct');
         } else {
             console.log('you are wrong');
@@ -91,6 +92,7 @@ const DataFetchingComponent = () => {
 
         setTimeout(() => {
             fetchQuestions(url2);
+            setAnimationNext(false);
         }, [3000]);
     };
 
@@ -129,10 +131,9 @@ const DataFetchingComponent = () => {
                 <div className="col-12 col-md-4">
                     <motion.h1
                         initial={{
-                            y: 50,
+                            opacity: [0, 1],
+                            transition: { duration: 1 },
                         }}
-                        animate={{ y: 0 }}
-                        transition={{ duration: 0.5 }}
                         className="text-center mb-3"
                     >
                         QUIZLET
@@ -142,9 +143,12 @@ const DataFetchingComponent = () => {
                     </motion.div>
                     <motion.div
                         className="question-box p-4"
-                        initial={{ display: 'none', opacity: 0, y: 100, transition: { duration: 0 } }}
-                        animate={!isAnimated ? { display: 'none', opacity: 0, y: 100, transition: { duration: 0 } } : { y: 0, opacity: 1, display: 'block' }}
-                        transition={{ delay: 0.5 }}
+                        initial={{ display: 'none', opacity: 0, y: 100, transition: { duration: 1 } }}
+                        animate={
+                            !isAnimated || !animationNext
+                                ? { opacity: 0, y: -100, transition: { duration: 0.2 } }
+                                : { y: [100, 0], opacity: 1, display: 'block', transition: { delay: 0.5, duration: 1 } }
+                        }
                     >
                         {questions.map((question, index) => (
                             <Questions

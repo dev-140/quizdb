@@ -41,7 +41,7 @@ function Questions(props) {
                         scale: clickedIndex === index ? 1.05 : 1,
                         transition: { duration: 0.2 },
                     }}
-                    transition={{ duration: index + 0.5 }}
+                    transition={{ delay: 300, duration: index + 0.5 }}
                     key={index}
                     className={`btn btn-secondary mb-3 w-100 option-btn ${clickedIndex === index ? 'active' : ''}`}
                     data-value={option}
