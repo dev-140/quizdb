@@ -39,6 +39,7 @@
     border: solid 1px $violet;
     font-weight: 500;
 
+    &.active,
     &:hover,
     &:active {
         background-color: $violet !important;

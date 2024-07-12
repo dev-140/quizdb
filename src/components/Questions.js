@@ -1,30 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 function Questions(props) {
-    let options = [];
     const [clickedIndex, setClickedIndex] = useState(null);
 
-    if (props.type !== 'boolean') {
-        options = [props.op1, props.op2, props.op3, props.op4];
-    } else {
-        options = [props.op1, props.op4];
-    }
-
-    const shuffleArray = (array) => {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    };
-
-    const shuffledOptions = shuffleArray(options);
-
-    const handleAnswer = (index) => {
-        console.log(`Button ${index} clicked`);
+    const handleAnswer = (index, value) => {
         setClickedIndex(index);
+        console.log(`Button ${index} clicked with value ${value}`);
+        props.handleCheck(props.correctAns === value);
+        props.isCorrect(value === props.correctAns);
     };
+
+    useEffect(() => {
+        setClickedIndex(null);
+    }, [props.optionsS]);
 
     return (
         <>
@@ -39,22 +28,25 @@ function Questions(props) {
                 dangerouslySetInnerHTML={{ __html: props.question }}
             ></motion.p>
 
-            {shuffledOptions.map((option, index) => (
+            {props.optionsS.map((option, index) => (
                 <motion.button
                     initial={{
                         x: 50,
                         opacity: 0,
+                        scale: 1,
                     }}
                     animate={{
                         x: 0,
                         opacity: 1,
-                        y: clickedIndex === index ? 10 : 0, // Change background color if clicked
+                        scale: clickedIndex === index ? 1.05 : 1,
+                        transition: { duration: 0.2 },
                     }}
                     transition={{ duration: index + 0.5 }}
                     key={index}
-                    className="btn btn-secondary mb-3 w-100"
+                    className={`btn btn-secondary mb-3 w-100 option-btn ${clickedIndex === index ? 'active' : ''}`}
+                    data-value={option}
                     dangerouslySetInnerHTML={{ __html: option }}
-                    onClick={handleAnswer}
+                    onClick={() => handleAnswer(index, option)}
                 ></motion.button>
             ))}
         </>
