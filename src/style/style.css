@@ -33,10 +33,32 @@
   border: solid 1px #8923f7;
   font-weight: 500;
 }
-.btn-secondary.active, .btn-secondary:hover, .btn-secondary:active {
+.btn-secondary:hover, .btn-secondary:active {
   background-color: #8923f7 !important;
   color: #fff !important;
   border: solid 1px #8923f7 !important;
+}
+.btn-secondary.active {
+  background-color: #fff !important;
+  color: #8923f7 !important;
+  border: solid 2px #8923f7 !important;
+  font-weight: 700;
+}
+.btn-secondary:disabled {
+  background-color: #fff;
+  border-radius: 10px;
+  color: #8923f7;
+  border: solid 1px #8923f7;
+  font-weight: 500;
+}
+.btn-secondary:disabled.default {
+  border: solid 1px #c73659 !important;
+  color: #c73659 !important;
+}
+.btn-secondary:disabled.correct {
+  border: solid 1px #51fb6a !important;
+  color: #151515 !important;
+  background-color: #51fb6a !important;
 }
 
 .main-container {
@@ -63,4 +85,20 @@
   min-height: 300px;
   background-color: #fff;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.error-modal {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.6980392157);
+}
+.error-modal .error-container {
+  background-color: #8923f7;
+  border-radius: 10px;
+  color: #fff;
+}
+.error-modal .error-container h3 {
+  font-weight: 700;
 }/*# sourceMappingURL=style.css.map */

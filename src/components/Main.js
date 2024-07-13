@@ -2,11 +2,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import Select from './Select';
 import { motion } from 'framer-motion';
 import Questions from './Questions';
+import ErrorModal from './ErrorModal';
 
 const DataFetchingComponent = () => {
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(true);
+    const [error, setError] = useState('');
     const [url2, setUrl2] = useState('https://opentdb.com/api.php?amount=1');
     const [isAnimated, setIsAnimated] = useState(false);
     const [isCountdown, setIsCountdown] = useState(false);
@@ -14,6 +15,7 @@ const DataFetchingComponent = () => {
     const [checkStatus, setCheckStatus] = useState(false);
     const [proceed, setProceed] = useState(false);
     const [animationNext, setAnimationNext] = useState(false);
+    const [showAnswerKey, setShowAnswerKey] = useState(false);
 
     let api = 'https://opentdb.com/api.php?amount=1';
     let options = [];
@@ -51,15 +53,18 @@ const DataFetchingComponent = () => {
                 setIsNext(false);
                 setQuestions(data.results);
                 setLoading(false);
+                setShowAnswerKey(false);
                 console.log(data.results);
                 setIsAnimated(true);
                 handleCountdown();
                 filterOptions(data.results);
                 setAnimationNext(true);
+                setError('');
             })
             .catch((error) => {
-                setError(error);
+                setError(error.message);
                 setLoading(false);
+                console.log(error.message);
             });
     };
 
@@ -82,8 +87,10 @@ const DataFetchingComponent = () => {
     };
 
     const handleReload = () => {
+        setIsNext(false);
         checkAnswer();
 
+        setShowAnswerKey(true);
         if (checkStatus) {
             console.log('you are correct');
         } else {
@@ -125,13 +132,17 @@ const DataFetchingComponent = () => {
         }, [5000]);
     };
 
+    useEffect(() => {
+        console.log('error log ' + error);
+    }, [error]);
+
     return (
         <div className="container  main-container">
             <div className="row h-100 d-flex align-items-center justify-content-center">
-                <div className="col-12 col-md-4">
+                <div className="col-12 col-md-6  col-lg-5 col-xl-4">
                     <motion.h1
                         initial={{
-                            opacity: [0, 1],
+                            opacity: 1,
                             transition: { duration: 1 },
                         }}
                         className="text-center mb-3"
@@ -159,6 +170,7 @@ const DataFetchingComponent = () => {
                                 optionsS={shuffledOptions}
                                 handleCheck={checkAnswer}
                                 isCorrect={handleChecking}
+                                showAnswer={showAnswerKey}
                             />
                         ))}
 
@@ -168,6 +180,8 @@ const DataFetchingComponent = () => {
                     </motion.div>
                 </div>
             </div>
+
+            <ErrorModal animate={error === 'Failed to fetch'} errVal={setError} back={setIsAnimated}></ErrorModal>
         </div>
     );
 };

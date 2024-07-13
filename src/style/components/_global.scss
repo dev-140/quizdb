@@ -39,11 +39,36 @@
     border: solid 1px $violet;
     font-weight: 500;
 
-    &.active,
     &:hover,
     &:active {
         background-color: $violet !important;
         color: $white !important;
         border: solid 1px $violet !important;
+    }
+
+    &.active {
+        background-color: $white !important;
+        color: $violet !important;
+        border: solid 2px $violet !important;
+        font-weight: 700;
+    }
+
+    &:disabled {
+        background-color: $white;
+        border-radius: 10px;
+        color: $violet;
+        border: solid 1px $violet;
+        font-weight: 500;
+
+        &.default {
+            border: solid 1px $red !important;
+            color: $red !important;
+        }
+
+        &.correct {
+            border: solid 1px $green !important;
+            color: $black !important;
+            background-color: $green !important;
+        }
     }
 }
