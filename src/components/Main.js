@@ -3,6 +3,7 @@ import Select from './Select';
 import { motion } from 'framer-motion';
 import Questions from './Questions';
 import ErrorModal from './ErrorModal';
+import { setDataLocal, fetchUserData, handleUserData } from './Setdata';
 
 const DataFetchingComponent = () => {
     const [questions, setQuestions] = useState([]);
@@ -16,6 +17,7 @@ const DataFetchingComponent = () => {
     const [proceed, setProceed] = useState(false);
     const [animationNext, setAnimationNext] = useState(false);
     const [showAnswerKey, setShowAnswerKey] = useState(false);
+    const [userData, setUserData] = useState([]);
 
     let api = 'https://opentdb.com/api.php?amount=1';
     let options = [];
@@ -90,18 +92,35 @@ const DataFetchingComponent = () => {
         setIsNext(false);
         checkAnswer();
 
+        setUserData(fetchUserData);
+
         setShowAnswerKey(true);
         if (checkStatus) {
-            console.log('you are correct');
+            setUserData((prev) => ({
+                ...prev,
+                correct: prev.correct + 1,
+            }));
         } else {
-            console.log('you are wrong');
+            setUserData((prev) => ({
+                ...prev,
+                wrong: prev.wrong + 1,
+            }));
         }
+
+        setUserData((prev) => ({
+            ...prev,
+            wrong: prev.total + 1,
+        }));
 
         setTimeout(() => {
             fetchQuestions(url2);
             setAnimationNext(false);
         }, [3000]);
     };
+
+    useEffect(() => {
+        console.log(userData);
+    }, [userData]);
 
     const shuffleArray = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -135,6 +154,8 @@ const DataFetchingComponent = () => {
     useEffect(() => {
         console.log('error log ' + error);
     }, [error]);
+
+    setDataLocal();
 
     return (
         <div className="container  main-container">

@@ -8,7 +8,7 @@ function ErrorModal(props) {
     };
 
     return (
-        <motion.div className="error-modal" animate={{ y: props.animate ? 0 : -100, opacity: props.animate ? 1 : 0, display: props.animate ? 'block' : 'none' }}>
+        <motion.div className="error-modal" initial={{ display: 'none' }} animate={{ y: props.animate ? 0 : -100, opacity: props.animate ? 1 : 0, display: props.animate ? 'block' : 'none' }}>
             <div className="container w-100 h-100">
                 <div className="row align-items-center justify-content-center h-100">
                     <div className="col d-flex justify-content-center">
