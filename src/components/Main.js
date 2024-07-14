@@ -93,23 +93,26 @@ const DataFetchingComponent = () => {
         checkAnswer();
 
         setUserData(fetchUserData);
-
         setShowAnswerKey(true);
         if (checkStatus) {
             setUserData((prev) => ({
                 ...prev,
                 correct: prev.correct + 1,
             }));
+
+            console.log('correct');
         } else {
             setUserData((prev) => ({
                 ...prev,
                 wrong: prev.wrong + 1,
             }));
+
+            console.log('wrong');
         }
 
         setUserData((prev) => ({
             ...prev,
-            wrong: prev.total + 1,
+            total: prev.total + 1,
         }));
 
         setTimeout(() => {
@@ -120,6 +123,9 @@ const DataFetchingComponent = () => {
 
     useEffect(() => {
         console.log(userData);
+        if (userData.length !== 0) {
+            handleUserData(userData);
+        }
     }, [userData]);
 
     const shuffleArray = (array) => {
@@ -157,6 +163,10 @@ const DataFetchingComponent = () => {
 
     setDataLocal();
 
+    const backToMenu = () => {
+        setIsAnimated(false);
+    };
+
     return (
         <div className="container  main-container">
             <div className="row h-100 d-flex align-items-center justify-content-center">
@@ -170,7 +180,12 @@ const DataFetchingComponent = () => {
                     >
                         QUIZLET
                     </motion.h1>
-                    <motion.div className="box p-4" initial={{ y: 100 }} animate={isAnimated ? { y: -100, opacity: 0, display: 'none' } : { y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
+                    <motion.div
+                        className="box p-4"
+                        initial={{ opacity: [0, 1], y: 100 }}
+                        animate={isAnimated ? { y: -100, opacity: 0, display: 'none' } : { y: 0, opacity: 1, transition: { delay: 0.5 } }}
+                        transition={{ duration: 0.5 }}
+                    >
                         <Select getData={getData}></Select>
                     </motion.div>
                     <motion.div
@@ -195,8 +210,12 @@ const DataFetchingComponent = () => {
                             />
                         ))}
 
-                        <button onClick={handleReload} className="btn btn-primary w-100" disabled={isNext ? false : true}>
+                        <button onClick={handleReload} className="btn btn-primary w-100 mb-3" disabled={isNext ? false : true}>
                             {isCountdown ? 'Confirm' : 'Read the question first'}
+                        </button>
+
+                        <button onClick={backToMenu} className="btn btn-primary w-100">
+                            Back to menu
                         </button>
                     </motion.div>
                 </div>

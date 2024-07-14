@@ -1,7 +1,7 @@
 const data = {
     correct: 0,
     wrong: 0,
-    toal: 0,
+    total: 0,
 };
 
 export const setDataLocal = () => {
@@ -16,6 +16,6 @@ export const handleUserData = (setUserData) => {
 };
 
 export const fetchUserData = () => {
-    // console.log(localStorage.getItem('userData'));
+    // console.log(JSON.parse(localStorage.getItem('userData')));
     return JSON.parse(localStorage.getItem('userData'));
 };
