@@ -3,7 +3,7 @@ import Select from './Select';
 import { motion } from 'framer-motion';
 import Questions from './Questions';
 import ErrorModal from './ErrorModal';
-import { setDataLocal, fetchUserData, handleUserData } from './Setdata';
+import { setDataLocal, fetchUserData, handleUserData, getCurrTime } from './Setdata';
 
 const DataFetchingComponent = () => {
     const [questions, setQuestions] = useState([]);
@@ -166,6 +166,8 @@ const DataFetchingComponent = () => {
     const backToMenu = () => {
         setIsAnimated(false);
     };
+
+    getCurrTime();
 
     return (
         <div className="container  main-container">
