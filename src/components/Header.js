@@ -1,5 +1,5 @@
 import React from 'react';
-import { delay, motion, stagger } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 function Header() {
     const frameVariants = {
@@ -31,11 +31,16 @@ function Header() {
         },
     };
 
-    const word = ['Q', 'U', 'I', 'Z', 'L', 'E', 'T'];
+    const word = ['Q', 'U', 'I', 'Z', 'D', 'B'];
 
     return (
         <div className="header p-5 position-fixed w-100">
-            <motion.div className="text-center mb-0 d-flex justify-content-center" variants={frameVariants} initial="hidden" animate="visible">
+            <motion.div
+                className="text-center mb-0 d-flex justify-content-center"
+                variants={frameVariants}
+                initial="hidden"
+                animate="visible"
+            >
                 {word.map((letter, index) => (
                     <motion.p key={index} variants={itemVariants}>
                         {letter}
