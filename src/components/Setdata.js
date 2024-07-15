@@ -7,7 +7,7 @@ const data = {
 export const setDataLocal = () => {
     if (localStorage.getItem('userData') === null) {
         localStorage.setItem('userData', JSON.stringify(data));
-        console.log(localStorage.getItem('userData'));
+        // console.log(localStorage.getItem('userData'));
     }
 };
 

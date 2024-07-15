@@ -38,7 +38,7 @@ const DataFetchingComponent = () => {
         }
 
         setUrl2(api);
-        console.log(api);
+        // console.log(api);
 
         fetchQuestions(api);
     };
@@ -59,7 +59,7 @@ const DataFetchingComponent = () => {
                 setQuestions(data.results);
                 setLoading(false);
                 setShowAnswerKey(false);
-                console.log(data.results);
+                // console.log(data.results);
                 setIsAnimated(true);
                 handleCountdown();
                 filterOptions(data.results);
@@ -69,7 +69,7 @@ const DataFetchingComponent = () => {
             .catch((error) => {
                 setError(error.message);
                 setLoading(false);
-                console.log(error.message);
+                // console.log(error.message);
             });
     };
 
@@ -79,7 +79,7 @@ const DataFetchingComponent = () => {
     };
 
     useEffect(() => {
-        console.log('Proceed updated:', proceed);
+        // console.log('Proceed updated:', proceed);
         setIsNext(checkParams);
     }, [proceed, isCountdown]);
 
@@ -103,14 +103,14 @@ const DataFetchingComponent = () => {
                 correct: prev.correct + 1,
             }));
 
-            console.log('correct');
+            // console.log('correct');
         } else {
             setUserData((prev) => ({
                 ...prev,
                 wrong: prev.wrong + 1,
             }));
 
-            console.log('wrong');
+            // console.log('wrong');
         }
 
         setUserData((prev) => ({
@@ -125,7 +125,7 @@ const DataFetchingComponent = () => {
     };
 
     useEffect(() => {
-        console.log(userData);
+        // console.log(userData);
         if (userData.length !== 0) {
             handleUserData(userData);
         }
@@ -141,8 +141,8 @@ const DataFetchingComponent = () => {
 
     const filterOptions = (dataResult) => {
         dataResult.forEach((dataB) => {
-            console.log(dataB.category);
-            console.log(dataB.type);
+            // console.log(dataB.category);
+            // console.log(dataB.type);
 
             if (dataB.type !== 'boolean') {
                 options = [
@@ -165,9 +165,9 @@ const DataFetchingComponent = () => {
         }, [5000]);
     };
 
-    useEffect(() => {
-        console.log('error log ' + error);
-    }, [error]);
+    // useEffect(() => {
+    //     console.log('error log ' + error);
+    // }, [error]);
 
     setDataLocal();
 
@@ -183,12 +183,12 @@ const DataFetchingComponent = () => {
         setStatsData(fetchUserData);
     };
 
-    useEffect(() => {
-        console.log(showStats);
-    }, [showStats]);
+    // useEffect(() => {
+    //     console.log(showStats);
+    // }, [showStats]);
 
     return (
-        <div className="container  main-container">
+        <div className="container main-container">
             <div className="row h-100 d-flex align-items-center justify-content-center">
                 <div className="col-12 col-md-6  col-lg-5 col-xl-4">
                     <motion.div

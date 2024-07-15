@@ -68,7 +68,7 @@
 }
 
 .main-container {
-  height: 100vh;
+  height: 90vh;
 }
 .main-container .box {
   overflow: hidden;
@@ -119,4 +119,8 @@
 }
 .status .row-stats {
   border-bottom: solid 1px;
+}
+
+.footer-main {
+  height: 10vh;
 }/*# sourceMappingURL=style.css.map */

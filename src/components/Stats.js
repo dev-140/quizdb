@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Stats(props) {
-    console.log(props.data);
+    // console.log(props.data);
 
     const accuray = ((props.data.correct / props.data.total) * 100).toFixed(2);
 

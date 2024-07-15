@@ -36,7 +36,7 @@ function Select(props) {
     };
 
     const setData = () => {
-        console.log(params);
+        // console.log(params);
         props.getData(params);
     };
 

@@ -7,18 +7,18 @@ function Questions(props) {
 
     const handleAnswer = (index, value) => {
         setClickedIndex(index);
-        console.log(`Button ${index} clicked with value ${value}`);
+        // console.log(`Button ${index} clicked with value ${value}`);
         props.handleCheck(props.correctAns === value);
         props.isCorrect(value === props.correctAns);
     };
 
-    useEffect(() => {
-        if (props.showAnswer) {
-            console.log('status op: ' + props.showAnswer);
-        } else {
-            console.log('status op: ' + props.showAnswer);
-        }
-    }, [props.showAnswer]);
+    // useEffect(() => {
+    //     if (props.showAnswer) {
+    //         console.log('status op: ' + props.showAnswer);
+    //     } else {
+    //         console.log('status op: ' + props.showAnswer);
+    //     }
+    // }, [props.showAnswer]);
 
     useEffect(() => {
         setClickedIndex(null);
