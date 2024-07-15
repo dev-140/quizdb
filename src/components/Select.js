@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
-function Select({ getData, setLoading }) {
+function Select(props) {
     const [params, setParams] = useState({
         category: '0',
         difficulty: '0',
@@ -36,14 +37,60 @@ function Select({ getData, setLoading }) {
 
     const setData = () => {
         console.log(params);
-        getData(params);
+        props.getData(params);
+    };
+
+    const parentVariant = {
+        hidden: {
+            opacity: 0,
+        },
+        visible: {
+            opacity: 1,
+
+            transition: {
+                duration: 0.5,
+                staggerChildren: 0.2,
+                delay: 1,
+            },
+        },
+    };
+
+    const selectVariant = {
+        hidden: {
+            opacity: 0,
+            x: -100,
+        },
+        visible: {
+            opacity: 1,
+            x: 0,
+            transition: {
+                duration: 1,
+                ease: 'linear',
+            },
+        },
     };
 
     return (
-        <div className="select-container d-flex flex-column align-items-center justify-content-center">
-            <h3 className="heading mb-3">Select Category:</h3>
+        <motion.div
+            className="select-container d-flex flex-column align-items-center justify-content-center"
+            variants={props.repeatAnimation ? '' : parentVariant}
+            initial="hidden"
+            animate="visible"
+        >
+            <motion.h3
+                variants={props.repeatAnimation ? '' : selectVariant}
+                className="heading mb-3"
+            >
+                Select Category:
+            </motion.h3>
 
-            <select className="form-select mb-3 text-center" aria-label="Category select" onChange={handleCategory} value={params.category}>
+            <motion.select
+                className="form-select mb-3 text-center"
+                aria-label="Category select"
+                onChange={handleCategory}
+                value={params.category}
+                variants={props.repeatAnimation ? '' : selectVariant}
+            >
                 <option value="0">Any</option>
                 <option value="9">General Knowledge</option>
                 <option value="10">Entertainment: Books</option>
@@ -69,29 +116,57 @@ function Select({ getData, setLoading }) {
                 <option value="30">Science: Gadgets</option>
                 <option value="31">Entertainment: Japanese Anime & Manga</option>
                 <option value="32">Entertainment: Cartoon & Animations</option>
-            </select>
+            </motion.select>
 
-            <h3 className="heading">Select Difficulty:</h3>
+            <motion.h3 className="heading" variants={props.repeatAnimation ? '' : selectVariant}>
+                Select Difficulty:
+            </motion.h3>
 
-            <select className="form-select mb-3 text-center" aria-label="Default select example" onChange={handleDifficulty} value={params.difficulty}>
+            <motion.select
+                className="form-select mb-3 text-center"
+                aria-label="Default select example"
+                onChange={handleDifficulty}
+                value={params.difficulty}
+                variants={props.repeatAnimation ? '' : selectVariant}
+            >
                 <option value="0">Any</option>
                 <option value="easy">Easy</option>
                 <option value="medium">Medium</option>
                 <option value="hard">Hard</option>
-            </select>
+            </motion.select>
 
-            <h3 className="heading">Select Type:</h3>
+            <motion.h3 className="heading" variants={props.repeatAnimation ? '' : selectVariant}>
+                Select Type:
+            </motion.h3>
 
-            <select className="form-select mb-3 text-center" aria-label="Default select example" onChange={handleType} value={params.type}>
+            <motion.select
+                className="form-select mb-3 text-center"
+                aria-label="Default select example"
+                onChange={handleType}
+                value={params.type}
+                variants={props.repeatAnimation ? '' : selectVariant}
+            >
                 <option value="0">Any</option>
                 <option value="multiple">Multiple Choice</option>
                 <option value="boolean">True / False</option>
-            </select>
+            </motion.select>
 
-            <button className="btn btn-primary w-100" onClick={setData}>
+            <motion.button
+                className="btn btn-primary w-100 mb-3"
+                onClick={setData}
+                variants={props.repeatAnimation ? '' : selectVariant}
+            >
                 Continue
-            </button>
-        </div>
+            </motion.button>
+
+            <motion.button
+                className="btn btn-primary w-100"
+                onClick={props.showStatus}
+                variants={props.repeatAnimation ? '' : selectVariant}
+            >
+                Show Stats
+            </motion.button>
+        </motion.div>
     );
 }
 

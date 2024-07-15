@@ -16,7 +16,6 @@ export const handleUserData = (setUserData) => {
 };
 
 export const fetchUserData = () => {
-    // console.log(JSON.parse(localStorage.getItem('userData')));
     return JSON.parse(localStorage.getItem('userData'));
 };
 
