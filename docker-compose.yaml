@@ -1,9 +1,9 @@
 version: '3'
 services:
-  quiz: 
-    build: ../quiz
-    container_name: quiz_c
-    ports:
-      - '3000:3000'
-    stdin_open: true
-    tty: true
+    quiz:
+        build: ../quiz
+        container_name: quiz_c
+        ports:
+            - '3000:3000'
+        stdin_open: true
+        tty: true
